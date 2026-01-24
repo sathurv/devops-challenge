@@ -19,7 +19,7 @@ variable "service_name" {
 variable "image_url" {
   description = "Docker image URL for the Cloud Run service"
   type        = string
-  default     = "sathurjan/devops-ass:8d6bb503008b48e94c08c22c4b692e32bb08d3eb"
+  default     = "sathurjan/devops-challenge:7cdf912f49f4b15794716e8da3ade92aec25e28b"
 }
 
 variable "container_port" {
