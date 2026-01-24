@@ -80,6 +80,8 @@ terraform apply
 
 Pipeline configuration: .github/workflows/pipeline.yml
 
+![alt text](image.png)
+
 ### Pipeline Stages
 
 **1. Test & Scan**
@@ -107,16 +109,7 @@ Pipeline configuration: .github/workflows/pipeline.yml
 
 ## Observability & Monitoring
 
-For high availability and reliability, the following approach is recommended:
-
-- Cloud Logging for application and access logs
-- Cloud Monitoring for:
-    - Request count
-    - Error rate
-    - Latency
-- Health endpoint (/health) enables uptime checks
-- Cloud Run auto-scaling handles traffic spikes while maintaining cost efficiency
-
+![alt text](<Image (2).png>)
 
 **The service relies on Google Cloud Run’s built-in observability features.**
 
@@ -130,6 +123,14 @@ For high availability and reliability, the following approach is recommended:
 - The service is stateless, allowing automatic horizontal scaling.
 - Autoscaling is configured with minScale = 0 to optimize cost.
 - In production, alerting policies would be configured for high error rate and latency thresholds.
+- Cloud Logging for application and access logs
+- Cloud Monitoring for:
+    - Request count
+    - Error rate
+    - Latency
+- Health endpoint (/health) enables uptime checks
+- Cloud Run auto-scaling handles traffic spikes while maintaining cost efficiency
+
 
 ## Security Considerations
 
