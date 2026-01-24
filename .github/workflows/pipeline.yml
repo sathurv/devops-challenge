@@ -46,3 +46,7 @@ jobs:
       run: |
         terraform plan -out="plan.tfplan" -lock=false
 
+    - name: Terraform apply
+      working-directory: iac
+      run: |
+        terraform apply -auto-approve plan.tfplan
