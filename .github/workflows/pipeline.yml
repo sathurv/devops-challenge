@@ -8,6 +8,37 @@ on:
 
 jobs:
 
+#### Test and scan code ####
+  test_and_scan_code:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Install dependencies
+      run: |
+        pip install -r app/requirements.txt
+        pip install bandit
+
+    - name: Run unit tests
+      run: |
+        cd app
+        pytest
+
+    - name: Run Bandit (code scan)
+      run: |
+        bandit -r app -ll
+
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@v2
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 ##### TF Deploy to GCP #####
   terraform_deploy_gcp:
