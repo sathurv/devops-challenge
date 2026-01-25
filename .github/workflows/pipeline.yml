@@ -134,3 +134,12 @@ jobs:
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "- **Service URL:** [${{ steps.cloudrun_service_url.outputs.url }}](${{ steps.cloudrun_service_url.outputs.url }})" >> $GITHUB_STEP_SUMMARY
         echo "- **Health Check:** [${{ steps.cloudrun_service_url.outputs.url }}/health](${{ steps.cloudrun_service_url.outputs.url }}/health)" >> $GITHUB_STEP_SUMMARY
+
+    - name: Health check Cloud Run service
+      run: |
+        echo "Running health check..."
+        curl --fail \
+             --retry 10 \
+             --retry-delay 3 \
+             --retry-all-errors \
+             "${{ steps.cloudrun_service_url.outputs.url }}/health"

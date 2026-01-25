@@ -23,6 +23,12 @@ The goal of this project is to demonstrate:
 
 The application is intentionally minimal to keep the focus on CI/CD, security, and infrastructure.
 
+![alt text](images/image-1.png)
+
+**Service URL:** https://devops-challenge-vxo36grczq-uw.a.run.app
+
+**Health Check:** https://devops-challenge-vxo36grczq-uw.a.run.app/health
+
 ---
 
 ## Running Locally
@@ -36,11 +42,6 @@ The application is intentionally minimal to keep the focus on CI/CD, security, a
 docker build -t devops-challenge .
 docker run -p 8080:8080 devops-challenge
 ```
-
-### Access:
-
-- http://localhost:8080/
-- http://localhost:8080/health
 
 ### Docker Image
 
@@ -80,7 +81,7 @@ terraform apply
 
 Pipeline configuration: .github/workflows/pipeline.yml
 
-![alt text](image.png)
+![alt text](images/image1.png)
 
 ### Pipeline Stages
 
@@ -96,7 +97,7 @@ Pipeline configuration: .github/workflows/pipeline.yml
 
 - Multi-stage Docker image build
 - Image tagged with commit SHA
-- Image pushed to Google Artifact Registry
+- Image pushed to docker Registry
 
 
 **3. Infrastructure & Deployment**
@@ -106,10 +107,11 @@ Pipeline configuration: .github/workflows/pipeline.yml
 - Application becomes reachable via public Cloud Run URL
 - Cloud Run URL is published in the GitHub Actions job summary
 
+![alt text](images/image.png)
 
 ## Observability & Monitoring
 
-![alt text](<Image (2).png>)
+![alt text](<images/Image2.png>)
 
 **The service relies on Google Cloud Run’s built-in observability features.**
 
@@ -147,3 +149,29 @@ Pipeline configuration: .github/workflows/pipeline.yml
 - Chose Cloud Run for simplicity, scalability, and cost efficiency
 - Terraform apply is automated only through CI to avoid configuration drift
 
+
+## Recommendation: Infrastructure and Application Separation
+
+For production environments, it is recommended to separate **infrastructure code** and **application code** into different repositories.
+
+### Proposed Approach
+
+**Infrastructure Repository**
+- Contains all Terraform code for shared and environment-specific resources
+- Infrastructure is deployed first (Artifact Registry, IAM, Cloud Run service, networking, etc.)
+- Changes are controlled and applied independently
+- Enables stronger governance, reviews, and access control
+
+**Application Repository**
+- Contains application source code, Dockerfile, and CI pipeline
+- Builds, tests, and scans the application
+- Builds and pushes the container image to Artifact Registry
+- Triggers a deployment by updating the Cloud Run service with the new image
+
+### Benefits
+
+- Clear separation of responsibilities (platform vs application)
+- Reduced risk of accidental infrastructure changes during app releases
+- Faster and safer application deployments
+- Easier multi-environment support (dev, stage, prod)
+- Better alignment with enterprise CI/CD and GitOps practices
