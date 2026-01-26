@@ -113,25 +113,18 @@ Pipeline configuration: .github/workflows/pipeline.yml
 
 ![alt text](<images/Image2.png>)
 
-**The service relies on Google Cloud Run’s built-in observability features.**
 
-- **Logging:** Application and request logs are written to stdout and collected automatically by Cloud Logging.
-- **Metrics:** Cloud Run exports request count, latency, error rate, and instance metrics to Cloud Monitoring.
-- **Health Checks:** A /health endpoint is exposed and validated in CI to ensure service readiness.
+The service relies on **Google Cloud Run’s built-in observability** capabilities.
 
-**High Availability & Reliability**
+- Application and request logs are written to stdout and automatically collected by **Cloud Logging**
+- Cloud Run exports key metrics such as **request count, latency, error rate, and instance metrics** to **Cloud Monitoring**
+- A `/health` endpoint is exposed and validated in CI to ensure service readiness
 
-- Cloud Run provides regional, multi-zone high availability by default.
-- The service is stateless, allowing automatic horizontal scaling.
-- Autoscaling is configured with minScale = 0 to optimize cost.
-- In production, alerting policies would be configured for high error rate and latency thresholds.
-- Cloud Logging for application and access logs
-- Cloud Monitoring for:
-    - Request count
-    - Error rate
-    - Latency
-- Health endpoint (/health) enables uptime checks
-- Cloud Run auto-scaling handles traffic spikes while maintaining cost efficiency
+Cloud Run provides **regional, multi-zone high availability** by default.  
+The service is stateless and auto-scales horizontally, with `minScale = 0` configured for cost efficiency.
+
+In production, **alerting policies** would be configured for high error rates and latency thresholds using Cloud Monitoring.
+
 
 
 ## Security Considerations
