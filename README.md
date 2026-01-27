@@ -97,6 +97,7 @@ Pipeline configuration: .github/workflows/pipeline.yml
 
 - Multi-stage Docker image build
 - Image tagged with commit SHA
+- Image scan using trivy
 - Image pushed to docker Registry
 
 
