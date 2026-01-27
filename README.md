@@ -149,6 +149,10 @@ In production, alerting policies would be configured in Cloud Monitoring for hig
 - Chose Cloud Run for simplicity, scalability, and cost efficiency
 - Terraform apply is automated only through CI to avoid configuration drift
 
+## Time Spent:
+
+Approximately 8 hours total.
+
 
 ## Recommendation: Infrastructure and Application Separation
 
